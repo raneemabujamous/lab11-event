@@ -1,8 +1,8 @@
 "use strict";
 
-const events = require("../event.pool");
+// const events = require("../event.pool");
 var faker = require("faker");
-
+const caps = require("../caps");
 let order = {
   store: "raneem shop",
   orderID: "1",
@@ -17,19 +17,19 @@ describe("testing all process", () => {
   });
 
   test("pickup event Work", async () => {
-    events.emit("pickup", order);
+    caps.emit("pickup", order);
     await consoleSpy();
     expect(consoleSpy).toHaveBeenCalled();
   });
 
   test("in-transit event Work ", async () => {
-    events.emit("in-transit", order);
+    caps.emit("in-transit", order);
     await consoleSpy();
     expect(consoleSpy).toHaveBeenCalled();
   });
 
   test("delivered event Work  ", async () => {
-    events.emit("delivered", order);
+    caps.emit("delivered", order);
     await consoleSpy();
     expect(consoleSpy).toHaveBeenCalled();
   });

@@ -1,8 +1,12 @@
-const events = require("../event.pool");
+// const events = require("../event.pool");
 var faker = require("faker");
-
+const io = require("socket.io-client"); //becouse it client
+const host = "http://localhost:3000";
+const capsconnection = io.connect(`${host}/caps`); //cliennt will contect to caps namespace
 const storeName = "Raneem shop";
-events.on("delivered", thankYou);
+// socket.emit("join", storeName);
+
+capsconnection.on("delivered", thankYou);
 function thankYou(payload) {
   console.log(`thank you ${payload.customer}`);
 }
@@ -13,7 +17,7 @@ setInterval(() => {
     customer: faker.name.firstName(),
     address: faker.address.city(),
   };
-  events.emit("pickup", order);
+  capsconnection.emit("pickup", order);
   //   console.log(order);
 }, 5000);
-module.exports = events;
+// module.exports = events;
