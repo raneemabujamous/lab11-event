@@ -1,24 +1,20 @@
-const events = require("../event.pool");
-events.on("pickup", pickUp);
+// const events = require("../event.pool");
+const io = require("socket.io-client");
+const host = "http://localhost:3000";
+const capsconnection = io.connect(`${host}/caps`);
+// const storeName = "Raneem shop";
+// socket.emit("join", storeName);
+
+capsconnection.on("pickup", pickUp);
 function pickUp(payload) {
-  //   setTimeout(() => {
-  //     console.log(`DRIVER: picked up ${payload.orderID}`);
-  //     events.emit("in-transit", payload);
-  //   }, 1000);
-
-  //   setTimeout(() => {
-  //     console.log(`DRIVER: delivered${payload.orderID}`);
-  //     events.emit("delivered", payload);
-  //   }, 3000);
-
   setInterval(() => {
     console.log(`DRIVER: picked up in-transit ${payload.orderID}`);
 
-    events.emit("in-transit", payload);
+    capsconnection.emit("in-transit", payload);
   }, 1000);
 
   setInterval(() => {
     console.log(`DRIVER: delievered ${payload.orderID}`);
-    events.emit("delivered", payload);
+    capsconnection.emit("delivered", payload);
   }, 3000);
 }
