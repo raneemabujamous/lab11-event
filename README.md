@@ -34,5 +34,5 @@ https://github.com/raneemabujamous/lab11-event/pulls
 
 ## peakage
 
-npm i jest supertest
+npm i jest supertest socket.io socket.io-client
 npm init -y
