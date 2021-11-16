@@ -2,7 +2,7 @@
 
 // const events = require("../event.pool");
 var faker = require("faker");
-const caps = require("../caps");
+const caps = require("../queue/queue.sever");
 let order = {
   store: "raneem shop",
   orderID: "1",

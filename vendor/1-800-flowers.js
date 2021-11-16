@@ -1,17 +1,9 @@
-// const events = require("../event.pool");
 var faker = require("faker");
 const io = require("socket.io-client"); //becouse it client
-const host = "http://localhost:3050";
+const host = "http://localhost:3000";
 const capsconnection = io.connect(`${host}/caps`); //cliennt will contect to caps namespace
-const storeName = "Raneem shop";
-// socket.emit("join", storeName);
-capsconnection.emit("get_all");
+const storeName = "1-800-flowers";
 
-capsconnection.on("delivered", thankYou);
-function thankYou(payload) {
-  console.log(payload, "from vendor tp acess it");
-  console.log(`thank you for delivered`);
-}
 setInterval(() => {
   let order = {
     store: storeName,
@@ -22,8 +14,7 @@ setInterval(() => {
   capsconnection.emit("pickup", order);
   //   console.log(order);
 }, 5000);
-capsconnection.on("addorder", (payload) => {
+socket.on("addorder", (payload) => {
   console.log("Thank u for adding my order to the Q>> ", payload);
-  // capsconnection.disconnect();
-  // capsconnection.emit("received", payload);
+  //   socket.disconnect();
 });
